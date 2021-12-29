@@ -19,10 +19,12 @@ def _numpy_scipy():
         'numpy>=1.17.5;python_version == "3.8"',
         'numpy>=1.19.4;python_version >= "3.9"',
     ]
+    # >= 1.7.2 currently triggers test failures
+    # see https://github.com/pymor/pymor/issues/1519
     scipys = [
-        'scipy>=1.3;python_version < "3.8"',
-        'scipy>=1.3.3;python_version == "3.8"',
-        'scipy>=1.5.4;python_version >= "3.9"',
+        'scipy>=1.3,<1.7.2;python_version < "3.8"',
+        'scipy>=1.3.3,<1.7.2;python_version == "3.8"',
+        'scipy>=1.5.4,<1.7.2;python_version >= "3.9"',
     ]
     return numpys + scipys
 
@@ -66,6 +68,7 @@ doc_requires = ['sphinx>=3.4', 'matplotlib', _PYSIDE, 'ipyparallel>=6.2.5', 'pyt
                 'sphinxcontrib-bibtex', 'sphinx-autoapi>=1.8', 'myst-nb'] + install_requires
 ci_requires = [_PYTEST, 'pytest-cov', 'pytest-xdist', 'check-manifest', 'nbconvert', 'pytest-parallel',
                'readme_renderer[md]', 'rstcheck', 'codecov', 'twine', 'pytest-memprof',
+               'jinja2', 'rich', 'build',
                'flake8-rst-docstrings', 'flake8-docstrings', 'pytest-datadir', 'pybind11',
                'docutils', "pypi-oldest-requirements>=2021.2", 'hypothesis[numpy,pytest]>=6.10',
                'PyQt5!=5.15.2,>5.7,!=5.15.2.*,!=5.15.4,!=5.15.3', 'check_reqs', 'scikit-fem']
